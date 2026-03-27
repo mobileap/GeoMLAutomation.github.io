@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GeoAI · Flood Extent Mapping</title>
+<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-logo"><span class="logo-bracket">[</span>GeoAI<span class="logo-bracket">]</span></div>
+  <ul class="nav-links">
+    <li><a href="index.html" class="active">Research</a></li>
+    <li><a href="skills.html">Skills</a></li>
+    <li><a href="resume.html">Resume</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="nav-coords"><span class="coord-dot"></span><span id="live-coords">51.5074° N, 0.1278° W</span></div>
+</nav>
+
+<div class="uc-wrapper">
+
+  <!-- BACK -->
+  <a href="index.html" class="back-link">← Back to Research</a>
+
+  <!-- HEADER -->
+  <div class="uc-header">
+    <div class="uc-meta-row">
+      <span class="domain-tag env-tag">Environmental</span>
+      <span class="task-tag">Segmentation</span>
+      <span class="research-badge">Personal Research</span>
+    </div>
+    <h1 class="uc-title">Flood Extent Mapping</h1>
+    <p class="uc-problem">
+      During the 2023 monsoon season, rapid and accurate delineation of flood-affected zones was critical for emergency response teams. Traditional manual digitising was too slow. This research explored whether SAR-based deep learning could produce reliable flood maps within hours of image acquisition.
+    </p>
+  </div>
+
+  <!-- VIDEO PLACEHOLDER -->
+  <div class="uc-video-block">
+    <div class="video-placeholder env">
+      <div class="sat-grid"></div>
+      <div class="video-play-btn">▶</div>
+      <span class="video-label">Demo · 0:42 · End-to-end pipeline walkthrough</span>
+    </div>
+  </div>
+
+  <!-- PIPELINE SECTION -->
+  <div class="uc-section">
+    <h2 class="uc-section-title">// Pipeline</h2>
+    <div class="pipeline-full">
+      <div class="pipe-full-step">
+        <div class="pipe-step-num">01</div>
+        <div class="pipe-step-body">
+          <h3>Input · Sentinel-1 SAR</h3>
+          <p>C-band SAR GRD product, 10m resolution, VV+VH polarisation. Acquired within 6 hours of flood peak. Downloaded via Copernicus Open Access Hub API.</p>
+          <div class="pipe-tags">
+            <span>Sentinel-1</span><span>C-band</span><span>10m</span><span>VV+VH</span>
+          </div>
+        </div>
+      </div>
+      <div class="pipe-connector">↓</div>
+      <div class="pipe-full-step">
+        <div class="pipe-step-num">02</div>
+        <div class="pipe-step-body">
+          <h3>Pre-processing · SNAP + Python</h3>
+          <p>Radiometric calibration, terrain correction (SRTM DEM), speckle filtering using Lee filter, and dB conversion. Automated using SNAP Graph Builder via subprocess in Python.</p>
+          <div class="pipe-tags">
+            <span>SNAP</span><span>GDAL</span><span>Lee Filter</span><span>SRTM</span>
+          </div>
+        </div>
+      </div>
+      <div class="pipe-connector">↓</div>
+      <div class="pipe-full-step">
+        <div class="pipe-step-num">03</div>
+        <div class="pipe-step-body">
+          <h3>Model · U-Net Segmentation</h3>
+          <p>Custom U-Net trained on Sen1Floods11 dataset. Binary segmentation — water vs non-water. Key challenge: handling mixed pixels at flood boundary in agricultural areas.</p>
+          <div class="pipe-tags">
+            <span>PyTorch</span><span>U-Net</span><span>Sen1Floods11</span><span>Binary segmentation</span>
+          </div>
+        </div>
+      </div>
+      <div class="pipe-connector">↓</div>
+      <div class="pipe-full-step">
+        <div class="pipe-step-num">04</div>
+        <div class="pipe-step-body">
+          <h3>Post-processing · Vectorisation</h3>
+          <p>Raster mask polygonised using GDAL, simplified with Douglas-Peucker, then loaded into PostGIS. Confidence scores attached per polygon based on model output probability.</p>
+          <div class="pipe-tags">
+            <span>GDAL</span><span>PostGIS</span><span>Douglas-Peucker</span>
+          </div>
+        </div>
+      </div>
+      <div class="pipe-connector">↓</div>
+      <div class="pipe-full-step">
+        <div class="pipe-step-num">05</div>
+        <div class="pipe-step-body">
+          <h3>Output · Interactive Web Map</h3>
+          <p>Flood polygons served via GeoServer WFS, visualised in Leaflet with time-slider control. Users can toggle satellite basemap, query individual polygons, and export affected area stats.</p>
+          <div class="pipe-tags">
+            <span>Leaflet.js</span><span>GeoServer</span><span>WFS</span><span>Python Flask</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="uc-section">
+    <h2 class="uc-section-title">// Results</h2>
+    <div class="results-grid">
+      <div class="result-card">
+        <span class="result-num">91%</span>
+        <span class="result-label">IoU on test tiles</span>
+      </div>
+      <div class="result-card">
+        <span class="result-num">4.2hrs</span>
+        <span class="result-label">Image to map delivery</span>
+      </div>
+      <div class="result-card">
+        <span class="result-num">340km²</span>
+        <span class="result-label">Area processed</span>
+      </div>
+      <div class="result-card">
+        <span class="result-num">94%</span>
+        <span class="result-label">Flood parcel detection rate</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- IO SUMMARY -->
+  <div class="uc-section">
+    <h2 class="uc-section-title">// Input · Output Summary</h2>
+    <div class="io-summary">
+      <div class="io-panel input-panel">
+        <div class="io-panel-label">INPUT</div>
+        <ul>
+          <li><span>Sensor</span> Sentinel-1 SAR (C-band)</li>
+          <li><span>Resolution</span> 10m GSD</li>
+          <li><span>Polarisation</span> VV + VH</li>
+          <li><span>Coverage</span> 340 km²</li>
+          <li><span>Acquisition</span> Within 6hrs of flood peak</li>
+        </ul>
+      </div>
+      <div class="io-arrow">→</div>
+      <div class="io-panel output-panel">
+        <div class="io-panel-label">OUTPUT</div>
+        <ul>
+          <li><span>Format</span> GeoJSON polygons</li>
+          <li><span>Attributes</span> Area, confidence score, land cover</li>
+          <li><span>Delivery</span> Interactive Leaflet web map</li>
+          <li><span>Export</span> Shapefile, CSV stats</li>
+          <li><span>Time</span> 4.2hrs end-to-end</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer class="footer">
+  <span class="footer-copy">© 2026 · Personal Research Portfolio</span>
+  <span class="footer-coords">Independent research · Not affiliated with any organisation</span>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>

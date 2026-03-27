@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GeoAI Portfolio · Research</title>
+<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-logo">
+    <span class="logo-bracket">[</span>GeoAI<span class="logo-bracket">]</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="index.html" class="active">Research</a></li>
+    <li><a href="skills.html">Skills</a></li>
+    <li><a href="resume.html">Resume</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="nav-coords">
+    <span class="coord-dot"></span>
+    <span id="live-coords">51.5074° N, 0.1278° W</span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-tag">// Personal Research</div>
+    <h1 class="hero-title">End-to-end<br><span class="accent">GeoAI Pipelines</span></h1>
+    <p class="hero-sub">Satellite data · Web GIS · Machine Learning · Automated spatial analysis — from raw sensor input to interactive map output.</p>
+  </div>
+  <div class="hero-stats">
+    <div class="stat">
+      <span class="stat-num">6</span>
+      <span class="stat-label">Research cases</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat">
+      <span class="stat-num">3</span>
+      <span class="stat-label">Satellite sources</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat">
+      <span class="stat-num">4</span>
+      <span class="stat-label">ML frameworks</span>
+    </div>
+  </div>
+</section>
+
+<!-- FILTERS -->
+<section class="filters-bar">
+  <div class="filter-group">
+    <span class="filter-label">Domain</span>
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="environmental">Environmental</button>
+    <button class="filter-btn" data-filter="urban">Urban</button>
+    <button class="filter-btn" data-filter="agriculture">Agriculture</button>
+    <button class="filter-btn" data-filter="disaster">Disaster Response</button>
+  </div>
+  <div class="filter-group">
+    <span class="filter-label">ML Task</span>
+    <button class="filter-btn" data-filter="segmentation">Segmentation</button>
+    <button class="filter-btn" data-filter="classification">Classification</button>
+    <button class="filter-btn" data-filter="timeseries">Time Series</button>
+  </div>
+</section>
+
+<!-- RESEARCH CARDS -->
+<section class="research-grid" id="research-grid">
+
+  <article class="r-card" data-tags="environmental segmentation" onclick="window.location='usecase.html'">
+    <div class="r-card-img">
+      <div class="img-placeholder env">
+        <div class="sat-grid"></div>
+        <span class="sensor-tag">SAR · Sentinel-1</span>
+        <div class="play-overlay">▶ 0:42</div>
+      </div>
+    </div>
+    <div class="r-card-body">
+      <div class="r-meta">
+        <span class="domain-tag env-tag">Environmental</span>
+        <span class="task-tag">Segmentation</span>
+      </div>
+      <h2 class="r-title">Flood Extent Mapping</h2>
+      <p class="r-desc">SAR imagery classified with U-Net to detect flood-affected zones in near real-time after a monsoon event. Outputs served as interactive PostGIS-backed map.</p>
+      <div class="r-pipeline">
+        <span class="pipe-node">Sentinel-1</span>
+        <span class="pipe-arr">→</span>
+        <span class="pipe-node">U-Net</span>
+        <span class="pipe-arr">→</span>
+        <span class="pipe-node">PostGIS</span>
+        <span class="pipe-arr">→</span>
+        <span class="pipe-node">Leaflet</span>
+      </div>
+    </div>
+  </article>
+
+  <article class="r-card" data-tags="urban segmentation" onclick="window.location='usecase.html'">
+    <div class="r-card-img">
+      <div class="img-placeholder urban">
+        <div class="sat-grid"></div>
+        <span class="sensor-tag">RGB · 0.5m Ortho</span>
+        <div class="play-overlay">▶ 1:05</div>
+      </div>
+    </div>
+    <div class="r-card-body">
+      <div class="r-meta">
+        <span class="domain-tag urban-tag">Urban</span>
+        <span class="task-tag">Segmentation</span>
+      </div>
+      <h2 class="r-title">Building Footprint Extraction</h2>
+      <p class="r-desc">High-res orthophoto segmented using SegFormer to extract building polygons for a city with no existing cadastral data.</p>
+      <div class="r-pipeline">
+        <span class="pipe-node">Ortho</span>
+        <span class="pipe-arr">→</span>
+        <span class="pipe-node">SegFormer</span>
+        <span class="pipe-arr">→</span>
+        <span class="pipe-node">GeoJSON</span>
+        <span class="pipe-arr">→</span>
+        <span class="pipe-node">MapboxGL</span>
+      </div>
+    </div>
+  </article>
+
+  <article class="r-card" data-tags="agriculture timeseries" onclick="window.location='usecase.html'">
+    <div class="r-card-img">
+      <div class="img-placeholder agri">
+        <div class="sat-grid"></div>
+        <span class="sensor-tag">MSI · Sentinel-2</span>
+        <div class="play-overlay">▶ 0:58</div>
+      </div>
+    </div>
+    <div class="r-card-body">
+      <div class="r-meta">
+        <span class="domain-tag agri-tag">Agriculture</span>
+        <span class="task-tag">Time Series</span>
+      </div>
+      <h2 class="r-title">Crop Health Monitoring</h2>
+      <p class="r-desc">Multi-temporal NDVI time series fed into an LSTM to predict stress zones 2 weeks ahead of visible symptoms.</p>
+      <div class="r-pipeline">
+        <span class="pipe-node">Sentinel-2</span>
+        <span class="pipe-arr">→</span>
+        <span class="pipe-node">NDVI Stack</span>
+        <span class="pipe-arr">→</span>
+        <span class="pipe-node">LSTM</span>
+        <span class="pipe-arr">→</span>
+        <span class="pipe-node">Heatmap</span>
+      </div>
+    </div>
+  </article>
+
+  <article class="r-card" data-tags="disaster classification" onclick="window.location='usecase.html'">
+    <div class="r-card-img">
+      <div class="img-placeholder disaster">
+        <div class="sat-grid"></div>
+        <span class="sensor-tag">Thermal · Landsat-8</span>
+        <div class="play-overlay">▶ 1:12</div>
+      </div>
+    </div>
+    <div class="r-card-body">
+      <div class="r-meta">
+        <span class="domain-tag disaster-tag">Disaster Response</span>
+        <span class="task-tag">Classification</span>
+      </div>
+      <h2 class="r-title">Wildfire Burn Scar Detection</h2>
+      <p class="r-desc">Pre/post fire imagery classified using Random Forest on spectral indices to map burn severity and affected land cover types.</p>
+      <div class="r-pipeline">
+        <span class="pipe-node">Landsat-8</span>
+        <span class="pipe-arr">→</span>
+        <span class="pipe-node">NBR Index</span>
+        <span class="pipe-arr">→</span>
+        <span class="pipe-node">RF Classifier</span>
+        <span class="pipe-arr">→</span>
+        <span class="pipe-node">GEE Map</span>
+      </div>
+    </div>
+  </article>
+
+</section>
+
+<footer class="footer">
+  <span class="footer-copy">© 2026 · Personal Research Portfolio</span>
+  <span class="footer-coords">All projects are independent research</span>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>
