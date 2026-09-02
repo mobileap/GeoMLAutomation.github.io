@@ -1,160 +1,69 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GeoAI Portfolio · Research</title>
-<link rel="stylesheet" href="style.css">
-<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Geospatial AI portfolio" />
+    <title>GeoAI Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="portfolio-sections.css" />
+    <link rel="stylesheet" href="skills-layout.css" />
+    <link rel="stylesheet" href="projects-heading.css" />
+    <link rel="stylesheet" href="thumbnail.css" />
+    <style>.brand strong{font-size:20px}.project-card{cursor:pointer}.brand-mark{width:38px;height:38px;border:1.5px solid #55e879;border-radius:50%;display:grid;place-items:center;color:#55e879;font-size:13px;font-weight:700;letter-spacing:.5px}.contact-heading .contact-icon{display:none}</style>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="Home"><span class="brand-mark">AP</span><span><strong>Akula Poojitha</strong></span></a>
+      <button class="menu-toggle" aria-label="Open navigation" aria-expanded="false">☰</button>
+      <nav class="nav-links" aria-label="Main navigation">
+        <a class="active" href="#top">Home</a><a href="#projects">Projects</a><a href="#skills">Skills</a><a href="#resume">Resume</a><a href="#contact">Contact</a>
+      </nav>
+    </header>
 
-<!-- NAV -->
-<nav class="nav">
-  <div class="nav-logo">
-    <span class="logo-bracket">[</span>GeoAI<span class="logo-bracket">]</span>
-  </div>
-  <ul class="nav-links">
-    <li><a href="index.html" class="active">Research</a></li>
-    <li><a href="skills.html">Skills</a></li>
-    <li><a href="resume.html">Resume</a></li>
-    <li><a href="contact.html">Contact</a></li>
-  </ul>
-  <div class="nav-coords">
-    <span class="coord-dot"></span>
-    <span id="live-coords">51.5074° N, 0.1278° W</span>
-  </div>
-</nav>
-
-<!-- FULL MAP BG: everything lives inside here -->
-<div class="map-bg-wrap">
-  <canvas id="map-canvas"></canvas>
-
-  <!-- FILTERS -->
-  <section class="filters-bar">
-    <div class="filter-group">
-      <span class="filter-label">Domain</span>
-      <button class="filter-btn active" data-filter="all">All</button>
-      <button class="filter-btn" data-filter="environmental">Environmental</button>
-      <button class="filter-btn" data-filter="urban">Urban</button>
-      <button class="filter-btn" data-filter="agriculture">Agriculture</button>
-      <button class="filter-btn" data-filter="disaster">Disaster Response</button>
-    </div>
-    <div class="filter-group">
-      <span class="filter-label">ML Task</span>
-      <button class="filter-btn" data-filter="segmentation">Segmentation</button>
-      <button class="filter-btn" data-filter="classification">Classification</button>
-      <button class="filter-btn" data-filter="timeseries">Time Series</button>
-    </div>
-  </section>
-
-  <!-- RESEARCH CARDS -->
-  <section class="research-grid" id="research-grid">
-
-    <article class="r-card" data-tags="environmental segmentation" onclick="window.location='usecase.html'">
-      <div class="r-card-img">
-        <span class="sensor-tag">SAR &#183; Sentinel-1</span>
-        <div class="play-overlay">&#9658; 0:42</div>
-      </div>
-      <div class="r-card-body">
-        <div class="r-meta">
-          <span class="domain-tag env-tag">Environmental</span>
-          <span class="task-tag">Segmentation</span>
+    <main id="top">
+      <section class="hero">
+        <div class="hero-grid"></div>
+        <div class="hero-copy">
+          <p class="eyebrow">GeoAI Engineer · Web GIS Developer</p>
+          <h1>Turning Earth observation data into <span>actionable intelligence.</span></h1>
+          <p class="hero-text">Building AI models and interactive GeoAI applications for Earth observation.</p>
+          <div class="hero-actions"><a class="button primary" href="#projects">Explore my work <b>→</b></a><a class="button secondary" href="#contact">Contact me <b>↗</b></a></div>
         </div>
-        <h2 class="r-title">Flood Extent Mapping</h2>
-        <p class="r-desc">SAR imagery classified with U-Net to detect flood-affected zones in near real-time after a monsoon event.</p>
-        <div class="r-pipeline">
-          <span class="pipe-node">Sentinel-1</span>
-          <span class="pipe-arr">&#8594;</span>
-          <span class="pipe-node">U-Net</span>
-          <span class="pipe-arr">&#8594;</span>
-          <span class="pipe-node">PostGIS</span>
-          <span class="pipe-arr">&#8594;</span>
-          <span class="pipe-node">Leaflet</span>
-        </div>
-      </div>
-    </article>
+      </section>
 
-    <article class="r-card" data-tags="urban segmentation" onclick="window.location='usecase.html'">
-      <div class="r-card-img">
-        <span class="sensor-tag">RGB &#183; 0.5m Ortho</span>
-        <div class="play-overlay">&#9658; 1:05</div>
-      </div>
-      <div class="r-card-body">
-        <div class="r-meta">
-          <span class="domain-tag urban-tag">Urban</span>
-          <span class="task-tag">Segmentation</span>
-        </div>
-        <h2 class="r-title">Building Footprint Extraction</h2>
-        <p class="r-desc">High-res orthophoto segmented using SegFormer to extract building polygons for a city with no existing cadastral data.</p>
-        <div class="r-pipeline">
-          <span class="pipe-node">Ortho</span>
-          <span class="pipe-arr">&#8594;</span>
-          <span class="pipe-node">SegFormer</span>
-          <span class="pipe-arr">&#8594;</span>
-          <span class="pipe-node">GeoJSON</span>
-          <span class="pipe-arr">&#8594;</span>
-          <span class="pipe-node">MapboxGL</span>
-        </div>
-      </div>
-    </article>
+      <section class="projects section" id="projects">
+        <div class="section-heading projects-heading"><h2>GeoAI &amp; Earth Observation Projects</h2></div>
+        <div class="project-grid" id="projectGrid"></div>
+      </section>
 
-    <article class="r-card" data-tags="agriculture timeseries" onclick="window.location='usecase.html'">
-      <div class="r-card-img">
-        <span class="sensor-tag">MSI &#183; Sentinel-2</span>
-        <div class="play-overlay">&#9658; 0:58</div>
-      </div>
-      <div class="r-card-body">
-        <div class="r-meta">
-          <span class="domain-tag agri-tag">Agriculture</span>
-          <span class="task-tag">Time Series</span>
+      <section class="skills section showcase-section" id="skills">
+        <div class="showcase-heading"><div><p class="eyebrow">Technical Toolkit</p></div></div>
+        <div class="skill-columns skill-timeline">
+          <article><div class="skill-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3 3 5v16l6-2 6 2 6-2V3l-6 2-6-2Z"/><path d="M9 3v16M15 5v16"/></svg></div><h3>Web Mapping &amp; Visualization</h3><span>◎ OpenLayers</span><span>◎ ArcGIS JavaScript API</span><span>◎ Google Maps API</span></article>
+          <article><div class="skill-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.5 18H7a4 4 0 1 1 .5-7.97A5.5 5.5 0 0 1 18 9.5 3.5 3.5 0 0 1 17.5 18Z"/></svg></div><h3>Cloud-Native EO &amp; Geospatial Data</h3><span>◉ Google Earth Engine</span><span>◉ Earth Search</span><span>◉ STAC APIs</span><span>◉ COG</span><span>◉ pystac-client</span><span>◉ TiTiler</span></article>
+          <article><div class="skill-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4a3 3 0 0 0-5 3 3 3 0 0 0 1 5 3 3 0 0 0 3 5M15 4a3 3 0 0 1 5 3 3 3 0 0 1-1 5 3 3 0 0 1-3 5M9 4v14M15 4v14M9 11h6"/></svg></div><h3>Deep Learning for Remote Sensing</h3><span>⌁ PyTorch</span><span>⌁ Hugging Face Transformers</span><span>⌁ Ultralytics</span></article>
+          <article><div class="skill-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17l5-6 4 4 8-9M15 6h5v5"/></svg></div><h3>Machine Learning</h3><span>◆ Scikit-learn</span><span>◆ LightGBM</span><span>◆ XGBoost</span></article>
+          <article><div class="skill-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 8 4-8 4-8-4 8-4M4 12l8 4 8-4M4 16l8 4 8-4"/></svg></div><h3>Python Geospatial &amp; Image Processing</h3><span>◈ GeoPandas</span><span>◈ Shapely</span><span>◈ Rasterio</span><span>◈ GDAL</span><span>◈ OpenCV</span></article>
+          <article><div class="skill-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 6 3 12l5 6M16 6l5 6-5 6"/></svg></div><h3>Programming Languages</h3><span>◇ Python</span><span>◇ JavaScript</span><span>◇ TypeScript</span><span>◇ SQL</span></article>
+          <article><div class="skill-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v5H4zM4 14h16v5H4z"/><path d="M8 7.5h.01M8 16.5h.01"/></svg></div><h3>Frontend &amp; Backend Development</h3><span>◌ React</span><span>◌ Angular</span><span>▣ FastAPI</span><span>▣ Flask</span></article>
+          <article><div class="skill-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-7.58 7-12a7 7 0 1 0-14 0c0 4.42 7 12 7 12Z"/><circle cx="12" cy="9" r="2.5"/></svg></div><h3>Spatial Databases &amp; Desktop GIS</h3><span>◉ PostgreSQL/PostGIS</span><span>◉ Oracle Spatial</span><span>◎ ArcGIS Pro</span><span>◎ QGIS</span></article>
         </div>
-        <h2 class="r-title">Crop Health Monitoring</h2>
-        <p class="r-desc">Multi-temporal NDVI time series fed into an LSTM to predict crop stress zones 2 weeks ahead of visible symptoms.</p>
-        <div class="r-pipeline">
-          <span class="pipe-node">Sentinel-2</span>
-          <span class="pipe-arr">&#8594;</span>
-          <span class="pipe-node">NDVI Stack</span>
-          <span class="pipe-arr">&#8594;</span>
-          <span class="pipe-node">LSTM</span>
-          <span class="pipe-arr">&#8594;</span>
-          <span class="pipe-node">Heatmap</span>
-        </div>
-      </div>
-    </article>
+      </section>
 
-    <article class="r-card" data-tags="disaster classification" onclick="window.location='usecase.html'">
-      <div class="r-card-img">
-        <span class="sensor-tag">Thermal &#183; Landsat-8</span>
-        <div class="play-overlay">&#9658; 1:12</div>
-      </div>
-      <div class="r-card-body">
-        <div class="r-meta">
-          <span class="domain-tag disaster-tag">Disaster Response</span>
-          <span class="task-tag">Classification</span>
-        </div>
-        <h2 class="r-title">Wildfire Burn Scar Detection</h2>
-        <p class="r-desc">Pre/post fire imagery classified using Random Forest on spectral indices to map burn severity across affected land cover.</p>
-        <div class="r-pipeline">
-          <span class="pipe-node">Landsat-8</span>
-          <span class="pipe-arr">&#8594;</span>
-          <span class="pipe-node">NBR Index</span>
-          <span class="pipe-arr">&#8594;</span>
-          <span class="pipe-node">RF Classifier</span>
-          <span class="pipe-arr">&#8594;</span>
-          <span class="pipe-node">GEE Map</span>
-        </div>
-      </div>
-    </article>
+      <section class="resume section showcase-section" id="resume">
+        <div class="resume-heading"><div><p class="eyebrow">Professional journey</p><h2>Resume</h2></div></div>
+        <div class="resume-grid"><div class="timeline"><h3>◉ Experience</h3><article><time>Feb 2024 – Mar 2026</time><h4>GIS Principal Consultant</h4><b>Aaseya IT Services Pvt Ltd, Riyadh</b><p>• Developed interactive Web GIS dashboards for real-time monitoring and analysis of urban visual pollution indicators.</p><p>• Built an automated data pipeline from collection to deployment with daily scheduled updates, Python-based KPI computation, and automated reporting.</p></article><article><time>Jan 2021 – Feb 2024</time><h4>Senior Engineer</h4><b>Tata Consultancy Services, Hyderabad</b><p>• Developed Web GIS applications for telecommunication network visualisation, planning, and real-time progress monitoring.</p><p>• Collaborated with clients to gather requirements and deliver solutions, mentoring team members and conducting code reviews to ensure quality delivery.</p></article><article><time>Apr 2018 – Dec 2020</time><h4>Sr. GIS Developer</h4><b>Unistal Systems Pvt. Ltd, Noida</b><p>• Designed and developed end-to-end Web GIS applications for oil and gas and water supply network construction, progress tracking, and visualisation.</p><p>• Built real-time outage management dashboards and maintained spatial databases to support data flow across application modules and reporting workflows.</p></article><article><time>Aug 2016 – Feb 2018</time><h4>GIS Developer</h4><b>Trinity Mobility Pvt Ltd, Bangalore</b><p>• Built an internal Web GIS library to standardise application development and reduce effort for non-GIS developers.</p><p>• Developed Smart City Web GIS applications integrating IoT sensor data for water management, bus tracking, logistics, and emergency response.</p></article><article><time>Apr 2015 – Jun 2016</time><h4>GIS Developer</h4><b>Asman Software Solutions Pvt Ltd, Hyderabad</b><p>• Designed and developed Web GIS applications for custom map management, dynamic spatial tools, and multi-source layer handling.</p><p>• Built a constituency monitoring application enabling project tracking, fund allocation, and issue management on an interactive map.</p></article></div><div class="resume-side"><div class="education"><h3>◎ Education</h3><article><time>2014</time><h4>Master of Technology in Spatial Information Technology <em>GPA 82</em></h4><p><i>Jawaharlal Nehru Technological University, Hyderabad</i></p><p>• Awarded a Gold Medal in M.Tech for academic excellence</p></article><article><time>2012</time><h4>Bachelor of Technology in Computer Science Engineering <em>GPA 75</em></h4><p><i>Mahatma Gandhi Institute of Technology, Hyderabad</i></p></article></div><div class="education certifications"><h3>◎ Certifications</h3><article><time>2026</time><h4>Introduction to Machine Learning for Earth Observation</h4><p><i>EO College</i></p></article><article><time>2026</time><h4>Echoes in Space (Earth Observation SAR Course)</h4><p><i>EO College</i></p></article></div></div></div>
+      </section>
 
-  </section>
-</div>
+      <section class="contact contact-full showcase-section" id="contact"><div class="contact-heading"><span class="contact-icon">⌁</span><div><h2>Contact</h2></div></div><div class="contact-panel"><a href="mailto:poojamgit@gmail.com"><b>✉</b><span><strong>Email</strong><small>poojamgit@gmail.com</small></span></a><a href="https://linkedin.com/in/akula-poojitha" target="_blank" rel="noopener"><b>in</b><span><strong>LinkedIn</strong><small>linkedin.com/in/akula-poojitha</small></span></a><a href="https://geoaiengineer.github.io" target="_blank" rel="noopener"><b class="contact-svg" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42 9.3-9.29H14V3Zm-2 2H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7h-2v7H5V7h7V5Z"/></svg></b><span><strong>Portfolio</strong><small>geoaiengineer.github.io</small></span></a><span class="contact-location"><b class="contact-svg" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg></b><span><strong>Location</strong><small>Saudi Arabia</small></span></span></div></section>
+    </main>
 
-<footer class="footer">
-  <span class="footer-copy">&#169; 2026 &#183; Personal Research Portfolio</span>
-  <span class="footer-coords">All projects are independent research</span>
-</footer>
+    <footer class="site-footer">Designed &amp; developed by Akula Poojitha · © 2026</footer>
 
-<script src="markers.js"></script>
-</body>
+    <script src="script.js"></script>
+  </body>
 </html>
